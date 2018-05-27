@@ -1,0 +1,22 @@
+<div class="container">
+<div class="game">  <h1>Result</h1>
+
+  <% if @realword && @canbuild %>
+  <p><strong>Congratulations!  </strong><%= "#{params[:guess].upcase} is a valid English word!" %></p>
+  <% elsif @realword && !@canbuild %>
+  <%= "Sorry but #{params[:guess].upcase} can't be built out of:" %>
+    <% @grid_array.each do |l| %>
+    <li class="list-inline-item"><%= "#{l.capitalize} " %></li>
+  <% end %>
+  <% else %>
+  <p><%= "Sorry but #{params[:guess].upcase} does not seem to be a valid English word" %></p>
+  <% end %>
+
+</div>
+  <%= link_to "New game", new_path %>
+</div>
+
+
+
+
+
