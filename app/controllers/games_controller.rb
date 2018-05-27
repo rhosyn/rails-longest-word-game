@@ -3,9 +3,10 @@ require 'json'
 
 class GamesController < ApplicationController
 
-
   def new
-    @letters = 10.times.map { ("a".."z").to_a[Random.rand(0..25)] }
+    vowels = 4.times.map { %w(a e i o u).to_a[Random.rand(0..4)] }
+    letters = 6.times.map { ("a".."z").to_a[Random.rand(0..25)] }
+    @letters = vowels.push(*letters).shuffle
   end
 
   def score
@@ -26,6 +27,12 @@ class GamesController < ApplicationController
     @realword = real_word
     @canbuild = can_build(guess, grid)
     @grid_array = params[:grid].split("")
+    if @realword && @canbuild
+      session[:score] += guess.length
+    end
+  end
 
+  def reset_game
+    session[:score] = 0
   end
 end

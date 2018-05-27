@@ -7,15 +7,22 @@
   <%= "Sorry but #{params[:guess].upcase} can't be built out of:" %>
     <% @grid_array.each do |l| %>
     <li class="list-inline-item"><%= "#{l.capitalize} " %></li>
-  <% end %>
+    <% end %>
+    <% elsif params[:guess] == "" %>
+  <p><%= "You didn't choose a word!" %></p>
   <% else %>
   <p><%= "Sorry but #{params[:guess].upcase} does not seem to be a valid English word" %></p>
   <% end %>
 
 </div>
   <%= link_to "New game", new_path %>
+
+  <%= "Your score is #{session[:score]}" %>
+  <%= link_to "Reset User", reset_game_path %>
+
 </div>
 
+<!-- <p><%= "Your score is #{session[:score]}" %></p> -->
 
 
 
